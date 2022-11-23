@@ -4,7 +4,7 @@ export class NewsItem extends Component {
   render() {
     let {title , description, imageUrl, newsUrl} = this.props;
     return (
-      <div className="card" style={{ width: "18rem" }}>
+      <div className="card">
         <img src={imageUrl ? imageUrl : "https://aylien.com/images/uploads/logos/News_API_logo_green_black_large.svg"} className="card-img-top" alt="..." />
         <div className="card-body">
           <h5 className="card-title">{title}...</h5>

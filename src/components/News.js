@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import Loading from "./Loading";
 import NewsItem from "./NewsItem";
+ 
 
 export class News extends Component {
+  
   constructor() {
     super();
     this.state = {
@@ -15,7 +17,7 @@ export class News extends Component {
   handleNextClick = async () => {
     console.log("Next");
 
-    let url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=c84cce4c34ef48c2901335baf6cfbd21&page=${
+    let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=c84cce4c34ef48c2901335baf6cfbd21&page=${
       this.state.page + 1
     }&pageSize=${this.props.pageSize}`;
     this.setState({
@@ -34,7 +36,7 @@ export class News extends Component {
   handlePrevClick = async () => {
     console.log("Prev");
 
-    let url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=c84cce4c34ef48c2901335baf6cfbd21&page=${
+    let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=c84cce4c34ef48c2901335baf6cfbd21&page=${
       this.state.page - 1
     }&pageSize=${this.props.pageSize}`;
     this.setState({
@@ -51,7 +53,7 @@ export class News extends Component {
   };
 
   async componentDidMount() {
-    let url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=c84cce4c34ef48c2901335baf6cfbd21&page=1&pageSize=${this.props.pageSize}`;
+    let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=c84cce4c34ef48c2901335baf6cfbd21&page=1&pageSize=${this.props.pageSize}`;
 
     this.setState({
       loading: true,
@@ -119,3 +121,4 @@ export class News extends Component {
 }
 
 export default News;
+
