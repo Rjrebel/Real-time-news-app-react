@@ -4,7 +4,7 @@ export class NewsItem extends Component {
   render() {
     let {title , description, imageUrl, newsUrl, author, date, source} = this.props;
     return (
-      <div className="card">
+      <div className="card mt-3">
         <span className="position-absolute top-0 translate-middle badge rounded-pill text-bg-danger" style={{zIndex : 1 , left : '90%'}}>{source}</span>
         <img src={imageUrl ? imageUrl : "https://aylien.com/images/uploads/logos/News_API_logo_green_black_large.svg"} className="card-img-top" alt="..." />
         <div className="card-body">
