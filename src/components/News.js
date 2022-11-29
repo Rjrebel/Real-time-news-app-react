@@ -21,38 +21,25 @@ export class News extends Component {
   }
 
   async updateNews() {
-    let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=0852d8316a1747b88780dde17affe3a7&page=1&pageSize=${this.props.pageSize}`;
+    this.props.setProgress(10);
+    let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=${this.props.apiKey}&page=1&pageSize=${this.props.pageSize}`;
 
     this.setState({
       loading: true,
     });
 
     let data = await fetch(url);
+    this.props.setProgress(30);
     let parsedData = await data.json();
-    console.log(parsedData);
+    this.props.setProgress(60);
     this.setState({
       articles: parsedData.articles,
       totalResults: parsedData.totalResults,
       loading: false,
     });
+    this.props.setProgress(100);
   }
 
-  // handleNextClick = async () => {
-  //   console.log("Next");
-
-  //   this.setState({
-  //     page: this.state.page + 1,
-  //   });
-  //   this.updateNews();
-  // };
-
-  // handlePrevClick = async () => {
-  //   console.log("Prev");
-  //   this.setState({
-  //     page: this.state.page + 1,
-  //   });
-  //   this.updateNews();
-  // };
 
   fetchMoreData = async () => {
     this.setState({
@@ -62,7 +49,6 @@ export class News extends Component {
 
     let data = await fetch(url);
     let parsedData = await data.json();
-    console.log(parsedData.articles);
     this.setState({
       articles: this.state.articles.concat(parsedData.articles),
       totalResults: parsedData.totalResults,
@@ -77,7 +63,7 @@ export class News extends Component {
   render() {
     return (
       <>
-        <div className="container my-3 mt-5">
+        <div className="my-3 mt-5">
           <h1 className="p-3 text-center">
             News 24x7 - Top {this.capitalizeFirstLetter(this.props.category)}{" "}
             Headlines
@@ -88,10 +74,11 @@ export class News extends Component {
             next={this.fetchMoreData}
             hasMore={this.state.articles.length !== this.state.totalResults}
             loader={<Loading />}
+            className="container"
           >
             {
-              <div className="container">
-                <div className="row g-3">
+                
+                <div className=" row g-3">
                   {this.state.articles.map((element) => {
                     return (
                       <div key={element.url} className="col-md-4">
@@ -110,7 +97,6 @@ export class News extends Component {
                     );
                   })}
                 </div>
-              </div>
             }
           </InfiniteScroll>
         </div>
